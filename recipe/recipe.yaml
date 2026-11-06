@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "3.24.1"
+  version: "4.3.0"
 
 package:
   name: pycryptodome
@@ -9,7 +9,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/p/pycryptodome/pycryptodome-${{ version }}.tar.gz
-  sha256: 3f9e74444c0ecbec7af232a95d282c74b114d53212ce075ed17b7fd7dca32bb3
+  sha256: 663fc5e1c4a3562d00c3a9b265fb94ef5f68c6085d982638b83e713af5487c06
 
 build:
   number: 0
@@ -25,14 +25,10 @@ requirements:
     - ${{ stdlib('c') }}
   host:
     - pip
-    - python
+    - python >=3.9
     - setuptools
-    - if: not win
-      then: gmp
   run:
-    - python
-    - if: not win
-      then: gmp
+    - python >=3.9
 
 tests:
   - python:
@@ -44,6 +40,8 @@ tests:
         - Crypto.Math
         - Crypto.Protocol
         - Crypto.PublicKey
+        - Crypto.PublicKey.MLDSA
+        - Crypto.PublicKey.MLKEM
         - Crypto.Random
         - Crypto.SelfTest
         - Crypto.SelfTest.Cipher
@@ -61,11 +59,18 @@ tests:
     files:
       recipe:
         - run_test.py
+  - script: python -m Crypto.SelfTest --skip-slow-tests -q
+    requirements:
+      run:
+        - pytest
 
 about:
   homepage: https://www.pycryptodome.org
-  license: BSD-2-Clause
-  license_file: LICENSE.rst
+  license: BSD-2-Clause AND Unlicense AND (Apache-2.0 OR ISC OR MIT)
+  license_file:
+    - LICENSE.rst
+    - src/mldsa-native/LICENSE
+    - src/mlkem-native/LICENSE
   summary: Cryptographic library for Python
   documentation: https://www.pycryptodome.org/en/latest/
   repository: https://github.com/Legrandin/pycryptodome
