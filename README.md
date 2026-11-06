@@ -5,7 +5,7 @@ Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/pycryptodome-fe
 
 Home: https://www.pycryptodome.org/
 
-Package license: BSD-2-Clause
+Package license: BSD-2-Clause AND Unlicense AND (Apache-2.0 OR ISC OR MIT)
 
 Summary: Cryptographic library for Python
 
