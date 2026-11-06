@@ -13,6 +13,7 @@ source:
 
 build:
   number: 0
+  skip: match(python, "<3.9")
   script: python -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
@@ -25,10 +26,10 @@ requirements:
     - ${{ stdlib('c') }}
   host:
     - pip
-    - python >=3.9
+    - python
     - setuptools
   run:
-    - python >=3.9
+    - python
 
 tests:
   - python:
